@@ -1,0 +1,20 @@
+version: '3'
+services:
+  kafka:
+    image: "confluentinc/cp-kafka:latest"
+    ports:
+     - "9092:9092"
+    volumes:
+     - .:/code
+    command: >
+      sh -c "kafka-server-start /code/config/server.properties"
+    depends_on:
+     - zookeeper
+  zookeeper:
+    image: "confluentinc/cp-zookeeper:latest"
+    ports:
+      - "2181:2181"
+    volumes:
+      - .:/code
+    command: >
+      sh -c "zookeeper-server-start /code/config/zookeeper.properties"
